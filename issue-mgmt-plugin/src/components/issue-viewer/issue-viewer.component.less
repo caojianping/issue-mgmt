@@ -1,0 +1,63 @@
+@import '../../less/vars.less';
+@import '../../less/mixins.less';
+
+.issue-viewer {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  z-index: @issue-index;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.15);
+
+  .issue-viewer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    height: 40px;
+    .line-bottom(@issue-index);
+
+    .issue-viewer-title {
+      margin: 0 16px 0 0;
+      padding: 0;
+      .font-styles(16px, normal, 1.5, @black, left);
+    }
+
+    .issue-viewer-switch {
+      .font-styles(14px, normal, 1.5, @gray, right);
+      cursor: pointer;
+    }
+  }
+
+  .issue-viewer-body {
+    padding: 0 16px;
+
+    table {
+      margin: 8px 0 12px;
+
+      thead tr th,
+      tbody tr td {
+        padding: 4px 8px;
+        .font-styles(14px, normal, 1.5, @black, center);
+      }
+
+      .issue-viewer-delete {
+        .font-styles(12px, normal, 1.5, #f0ad4e, center);
+        cursor: pointer;
+      }
+
+      .issue-viewer-view {
+        .font-styles(12px, normal, 1.5, #337ab7, center);
+        cursor: pointer;
+      }
+    }
+  }
+
+  &.issue-viewer-collapsed {
+    .issue-viewer-header .issue-viewer-title,
+    .issue-viewer-body {
+      display: none;
+    }
+  }
+}

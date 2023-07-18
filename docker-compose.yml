@@ -1,0 +1,48 @@
+version: "3"
+services:
+  mongodb:
+    image: vepo/mongo
+    container_name: mongodb
+    environment:
+      - AUTH=yes
+      - ADMIN_USER=root
+      - ADMIN_PASS=111111
+      - APPLICATION_DATABASE=issue-mgmt
+      - APPLICATION_USER=admin
+      - APPLICATION_PASS=222222
+    ports: 
+      - 27017:27017
+    volumes:
+      - ./data:/data
+    restart: always
+    networks:
+      - default
+
+  issue-mgmt-service:
+    build: ./issue-mgmt-service
+    image: issue-mgmt-service
+    container_name: issue-mgmt-service-cn
+    ports: 
+      - 10000:8888
+    volumes:
+      - ./issue-mgmt-service/dist:/app/dist
+    command: yarn build:test
+    depends_on:
+      - mongodb
+    networks:
+      - default
+  
+  issue-mgmt-plugin:
+    build: ./issue-mgmt-plugin
+    image: issue-mgmt-plugin
+    container_name: issue-mgmt-plugin-cn
+    ports: 
+      - 10001:80
+    volumes:
+      - ./issue-mgmt-plugin/dist:/usr/share/nginx/html
+    networks:
+      - default
+
+networks:
+  default:
+    driver: bridge

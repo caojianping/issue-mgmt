@@ -1,0 +1,46 @@
+// 参数混入：字体样式
+.font-styles (@font-size: 14px, @font-weight: normal, @line-height: 1.5, @color: #333, @text-align: left) {
+  font-size: @font-size;
+  font-weight: @font-weight;
+  line-height: @line-height;
+  color: @color;
+  text-align: @text-align;
+}
+
+// 参数混入：细线样式
+.line-bottom(@index) {
+  position: relative;
+  z-index: @index;
+
+  &::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: @index + 1;
+    display: block;
+    content: '';
+    height: 1px;
+    background-color: #ebedf0;
+    transform: scaleY(0.5);
+  }
+}
+
+// 参数混入：细线样式
+.line-top(@index) {
+  position: relative;
+  z-index: @index;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: @index + 1;
+    display: block;
+    content: '';
+    height: 1px;
+    background-color: #ebedf0;
+    transform: scaleY(0.5);
+  }
+}

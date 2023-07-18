@@ -1,0 +1,7 @@
+{
+  "services": {
+    "port": 8888,
+    "mongodb": "mongodb://admin:222222@mongodb/issue-mgmt",
+    "virtual": ""
+  }
+}
